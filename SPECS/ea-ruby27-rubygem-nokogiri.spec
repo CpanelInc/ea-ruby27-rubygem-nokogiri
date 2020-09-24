@@ -47,8 +47,6 @@ Requires:       %{?scl_prefix}ruby(rubygems)
 Requires:       %{?scl_prefix}ruby(release)
 %{?scl:Requires:%scl_runtime}
 
-BuildRequires:  tree
-
 BuildRequires:  libxml2-devel
 BuildRequires:  libxslt-devel
 BuildRequires:  %{?scl_prefix}ruby
@@ -134,32 +132,20 @@ rm -f ./%{geminstdir}/lib/*.jar \
 rm -rf ./%{geminstdir}/ext/java \
 %{?scl:EOF} 
 
-tree -a opt
-
 %install
 %global gemsbase opt/cpanel/ea-ruby27/root/usr/share/ruby/gems/ruby-%{ruby_version}
 %global gemsdir  %{gemsbase}/gems
 %global gemsmri  %{gemsdir}/nokogiri-%{version}
 %global gemsextmri  %{gemsmri}/ext
 
-mkdir -p %{buildroot}/%{gemsdir}
-cp -ra ./%{gemsdir}/* %{buildroot}/%{gemsdir}
+mkdir -p %{buildroot}/%{gemsbase}
+cp -ra ./%{gemsbase}/* %{buildroot}/%{gemsbase}
 
-# Remove backup file
-find %{buildroot} -name \*.orig_\* | xargs rm -vf
-
-# move arch dependent files to %%gem_extdir
-mkdir -p %{buildroot}%{gemsextmri}
-cp -ra ./%{gemsextmri}/* %{buildroot}/%{gemsextmri}/
-
-pushd %{buildroot}
-rm -f .%{gemsextmri}/{gem_make.out,mkmf.log}
-popd
-
-# move bin/ files
 mkdir -p %{buildroot}%{_bindir}
-cp -pa .%{_bindir}/* \
-        %{buildroot}%{_bindir}/
+cp -pa ./%{gemsmri}/bin/* %{buildroot}%{_bindir}
+
+echo "BINDIR" %{buildroot}%{_bindir}
+ls -ld %{buildroot}%{_bindir}/*
 
 # remove all shebang
 for f in $(find %{buildroot}/%{gemsmri} -name \*.rb)
@@ -168,14 +154,7 @@ do
     chmod 0644 $f
 done
 
-mkdir -p %{buildroot}/%{gemsbase}/specifications
-cp -a %{gemsbase}/specifications/%{gem_name}-%{version}.gemspec %{buildroot}/%{gemsbase}/specifications/%{gem_name}-%{version}.gemspec
-
-mkdir -p %{buildroot}/%{gemsbase}/doc/%{gem_name}-%{version}
-cp -a %{gemsmri}/*.md %{buildroot}/%{gemsbase}/doc/%{gem_name}-%{version}
-
 # cleanups
-rm -rf %{buildroot}/%{gemsextmri}/%{gem_name}/
 rm -f %{buildroot}/%{gemsmri}/{.autotest,.require_paths,.gemtest,.travis.yml}
 rm -f %{buildroot}/%{gemsmri}/appveyor.yml
 rm -f %{buildroot}/%{gemsmri}/.cross_rubies
@@ -184,21 +163,25 @@ rm -f %{buildroot}/%{gemsmri}/.editorconfig
 rm -rf %{buildroot}/%{gemsmri}/suppressions/
 rm -rf %{buildroot}/%{gemsmri}/patches/
 
-tree -a %{buildroot}/%{gemsbase}
-
 %files
 %defattr(-,root, root,-)
 %{_bindir}/%{gem_name}
-/%{gemsextmri}/
+/%{gemsbase}/gems
+/%{gemsbase}/specifications/*
 %dir    /%{gemsmri}/
 %doc    /%{gemsmri}/[A-Z]*
+/%{gemsmri}/*
 /%{gemsmri}/bin/
 /%{gemsmri}/lib/
 /%{gemsbase}/specifications/%{gem_name}-%{version}.gemspec
+%exclude /%{gemsbase}/doc
+/%{gemsbase}/cache/nokogiri-*.gem
+/%{gemsbase}/extensions/x86_64-linux/*/nokogiri-*/*
+/%{gemsbase}/extensions/x86_64-linux/*/nokogiri-*/nokogiri/nokogiri.so
 
 %files  doc
 %defattr(-,root,root,-)
-/%{gemsbase}/doc/%{gem_name}-%{mainver}
+%dir /%{gemsbase}/doc/nokogiri-*/*
 
 %changelog
 * Fri Sep 11 2020 Julian Brown <julian.brown@cpanel.net> 1.10.9-1
