@@ -41,7 +41,7 @@ URL:        http://nokogiri.rubyforge.org/nokogiri/
 Source0:    https://rubygems.org/gems/%{gem_name}-%{mainver}.gem
 
 # Shut down libxml2 version unmatching warning
-Patch0:    rubygem-nokogiri-1.6.6.4-shutdown-libxml2-warning.patch
+Patch0:     0001-shutdown-libxml2-warning.patch
 
 Requires:       %{?scl_prefix}ruby(rubygems)
 Requires:       %{?scl_prefix}ruby(release)
