@@ -119,7 +119,6 @@ rm -rf tmpunpackdir
 %{?scl:EOF}
 
 %build
-echo "IS IT HERE: 001"
 find /opt/cpanel/ea-ruby27/root/usr -type f -print
 
 %{?scl:scl enable %{scl} - << \EOF} \
@@ -136,9 +135,6 @@ rm -rf ./%{geminstdir}/ext/java \
 %{?scl:EOF} 
 
 %install
-echo "INSTALL: 001"
-find . -type f -print
-
 %global rubylib  opt/cpanel/ea-ruby27/root/usr/lib64/gems/ruby/
 %global rubybase opt/cpanel/ea-ruby27/root/usr/share/ruby/ruby-%{ruby_version}
 %global gemsbase opt/cpanel/ea-ruby27/root/usr/share/gems
@@ -152,9 +148,6 @@ mkdir -p %{buildroot}/%{rubylib}
 mkdir -p %{buildroot}/%{rubybase}/nokogiri
 mkdir -p %{buildroot}/opt/cpanel/ea-ruby27/root/usr/lib64/gems/ruby/nokogiri-%{version}
 
-echo "NOKO"
-find . -name nokogiri.rb
-
 cp -ra ./%{gemsbase}/* %{buildroot}/%{gemsbase}
 cp -ra ./%{gemsbase}/gems/nokogiri-%{version} %{buildroot}/%{rubybase}
 cp -a ./%{gemsbase}/gems/nokogiri-%{version}/lib/nokogiri.rb %{buildroot}/%{rubybase}
@@ -165,17 +158,8 @@ cp -a ./%{gemsbase}/gems/nokogiri-%{version}/ext/nokogiri/nokogiri.so %{buildroo
 cp -afr ./%{gemsbase}/gems/nokogiri-%{version}/lib/nokogiri/* %{buildroot}/%{rubybase}/nokogiri
 cp -a ./opt/cpanel/ea-ruby27/root/usr/lib64/gems/ruby/nokogiri-%{version}/gem.build_complete %{buildroot}/opt/cpanel/ea-ruby27/root/usr/lib64/gems/ruby/nokogiri-%{version}
 
-echo "ANY: 001"
-find ./%{gemsbase} -type f -print
-
 mkdir -p %{buildroot}%{_bindir}
 cp -pa ./%{gemsmri}/bin/* %{buildroot}%{_bindir}
-
-echo "ANY: 002"
-find ./%{gemsmri}/bin -type f -print
-
-echo "BINDIR" %{buildroot}%{_bindir}
-ls -ld %{buildroot}%{_bindir}/*
 
 # remove all shebang
 for f in $(find %{buildroot}/%{gemsmri} -name \*.rb)
@@ -192,18 +176,6 @@ rm -f %{buildroot}/%{gemsmri}/{build_all,dependencies.yml,test_all}
 rm -f %{buildroot}/%{gemsmri}/.editorconfig
 rm -rf %{buildroot}/%{gemsmri}/suppressions/
 rm -rf %{buildroot}/%{gemsmri}/patches/
-
-echo "ANY: 003"
-find %{buildroot}/%{gemsbase} -type f -print
-
-echo "ANY: 004"
-find %{buildroot}/%{gemsmri}/bin -type f -print
-
-echo "BASE" %{gemsbase}
-echo "MRI" %{gemsmri}
-
-# ./share/gems/gems/psych-3.1.0/lib/psych.rb
-# ./share/ruby/ruby-2.7.1/psych.rb
 
 %files
 %defattr(-,root, root,-)
