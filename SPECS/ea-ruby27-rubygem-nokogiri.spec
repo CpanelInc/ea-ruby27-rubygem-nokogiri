@@ -119,8 +119,6 @@ rm -rf tmpunpackdir
 %{?scl:EOF}
 
 %build
-find /opt/cpanel/ea-ruby27/root/usr -type f -print
-
 %{?scl:scl enable %{scl} - << \EOF} \
  \
 # 1.6.0 needs this \
