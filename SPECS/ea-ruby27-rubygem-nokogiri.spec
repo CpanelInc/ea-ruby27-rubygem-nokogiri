@@ -5,7 +5,7 @@
 %global gem_name nokogiri
 
 # NOTE: I need the version, is there a better way?
-%global ruby_version 2.7.1
+%global ruby_version 2.7.2
 
 # Force Software Collections on
 %global _scl_prefix %{ns_dir}
@@ -19,7 +19,7 @@
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
 %define release_prefix 1
 
-%global mainver     1.10.9
+%global mainver     1.11.1
 
 %global gem_name     nokogiri
 %global gemdir      %{gem_dir}
@@ -191,6 +191,9 @@ rm -rf %{buildroot}/%{gemsmri}/patches/
 /%{gemsbase}/doc
 
 %changelog
+* Thu Feb 25 2021 Cory McIntire <cory@cpanel.net> 1.11.1-1
+- EA-9605: Update from v1.10.9 to v1.11.1
+
 * Fri Sep 11 2020 Julian Brown <julian.brown@cpanel.net> 1.10.9-1
 - ZC-7541 - Initial build
 
