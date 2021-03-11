@@ -17,9 +17,7 @@
 %{?scl:%scl_package rubygem-%{gem_name}}
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define release_prefix 1
-
-%global mainver     1.11.1
+%define release_prefix 2
 
 %global gem_name     nokogiri
 %global gemdir      %{gem_dir}
@@ -33,12 +31,12 @@
 
 Summary:    An HTML, XML, SAX, and Reader parser
 Name:       %{?scl:%scl_prefix}rubygem-%{gem_name}
-Version:    %{mainver}
+Version:    1.11.1
 Release:    %{release_prefix}%{?dist}.cpanel
 Group:      Development/Languages
 License:    MIT
 URL:        http://nokogiri.rubyforge.org/nokogiri/
-Source0:    https://rubygems.org/gems/%{gem_name}-%{mainver}.gem
+Source0:    https://rubygems.org/gems/%{gem_name}-%{version}.gem
 
 # Shut down libxml2 version unmatching warning
 Patch0:     0001-shutdown-libxml2-warning.patch
@@ -191,6 +189,9 @@ rm -rf %{buildroot}/%{gemsmri}/patches/
 /%{gemsbase}/doc
 
 %changelog
+* Wed Mar 10 2021 Travis Holloway <t.holloway@cpanel.net> - 1.11.1-2
+- EA-9607: Update Version to be compatible with tooling
+
 * Thu Feb 25 2021 Cory McIntire <cory@cpanel.net> 1.11.1-1
 - EA-9605: Update from v1.10.9 to v1.11.1
 
