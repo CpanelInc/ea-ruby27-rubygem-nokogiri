@@ -38,9 +38,6 @@ License:    MIT
 URL:        http://nokogiri.rubyforge.org/nokogiri/
 Source0:    https://rubygems.org/gems/%{gem_name}-%{version}.gem
 
-# Shut down libxml2 version unmatching warning
-Patch0:     0001-shutdown-libxml2-warning.patch
-
 Requires:       %{?scl_prefix}ruby(rubygems)
 Requires:       %{?scl_prefix}ruby(release)
 %{?scl:Requires:%scl_runtime}
@@ -94,9 +91,6 @@ pushd tmpunpackdir
 
 gem unpack %{SOURCE0}
 cd %{gem_name}-%{version}
-
-# patches
-%patch0 -p1
 
 gem specification -l --ruby %{SOURCE0} > %{gem_name}.gemspec
 
