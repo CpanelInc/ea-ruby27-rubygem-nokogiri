@@ -4,7 +4,6 @@
 %global pkg ruby27
 %global gem_name nokogiri
 
-# NOTE: I need the version, is there a better way?
 %global ruby_version %(/opt/cpanel/ea-ruby27/root/usr/bin/ruby -e 'puts RUBY_VERSION')
 
 # Force Software Collections on
