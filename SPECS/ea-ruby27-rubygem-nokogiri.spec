@@ -5,7 +5,7 @@
 %global gem_name nokogiri
 
 # NOTE: I need the version, is there a better way?
-%global ruby_version 2.7.2
+%global ruby_version %(/opt/cpanel/ea-ruby27/root/usr/bin/ruby -e 'puts RUBY_VERSION')
 
 # Force Software Collections on
 %global _scl_prefix %{ns_dir}
@@ -44,7 +44,7 @@ Requires:       %{?scl_prefix}ruby(release)
 
 BuildRequires:  libxml2-devel
 BuildRequires:  libxslt-devel
-BuildRequires:  %{?scl_prefix}ruby
+BuildRequires:  %{?scl_prefix}ruby(release)
 BuildRequires:  %{?scl_prefix}ruby(rubygems)
 BuildRequires:  %{?scl_prefix}rubygems-devel
 BuildRequires:  %{?scl_prefix}ruby-devel
