@@ -4,8 +4,7 @@
 %global pkg ruby27
 %global gem_name nokogiri
 
-# NOTE: I need the version, is there a better way?
-%global ruby_version 2.7.2
+%global ruby_version %(/opt/cpanel/ea-ruby27/root/usr/bin/ruby -e 'puts RUBY_VERSION')
 
 # Force Software Collections on
 %global _scl_prefix %{ns_dir}
@@ -31,7 +30,7 @@
 
 Summary:    An HTML, XML, SAX, and Reader parser
 Name:       %{?scl:%scl_prefix}rubygem-%{gem_name}
-Version:    1.11.6
+Version:    1.11.7
 Release:    %{release_prefix}%{?dist}.cpanel
 Group:      Development/Languages
 License:    MIT
@@ -44,7 +43,7 @@ Requires:       %{?scl_prefix}ruby(release)
 
 BuildRequires:  libxml2-devel
 BuildRequires:  libxslt-devel
-BuildRequires:  %{?scl_prefix}ruby
+BuildRequires:  %{?scl_prefix}ruby(release)
 BuildRequires:  %{?scl_prefix}ruby(rubygems)
 BuildRequires:  %{?scl_prefix}rubygems-devel
 BuildRequires:  %{?scl_prefix}ruby-devel
@@ -183,6 +182,9 @@ rm -rf %{buildroot}/%{gemsmri}/patches/
 /%{gemsbase}/doc
 
 %changelog
+* Mon Jun 28 2021 Cory McIntire <cory@cpanel.net> - 1.11.7-1
+- EA-9904: Update ea-ruby27-rubygem-nokogiri from v1.11.6 to v1.11.7
+
 * Wed Jun 02 2021 Julian Brown <julian.brown@cpanel.net> - 1.11.6-1
 - EA-9817: Update ea-ruby27-rubygem-nokogiri from v1.11.1 to v1.11.6
 
