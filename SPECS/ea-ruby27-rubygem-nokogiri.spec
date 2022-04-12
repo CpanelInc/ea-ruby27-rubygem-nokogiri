@@ -16,7 +16,7 @@
 %{?scl:%scl_package rubygem-%{gem_name}}
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define release_prefix 4
+%define release_prefix 5
 
 %global gem_name     nokogiri
 %global gemdir      %{gem_dir}
@@ -182,6 +182,9 @@ rm -rf %{buildroot}/%{gemsmri}/patches/
 /%{gemsbase}/doc
 
 %changelog
+* Tue Apr 12 2022 Cory McIntire <cory@cpanel.net> - 1.11.7-5
+- EA-10620: ea-ruby27 was updated from v2.7.5 to v2.7.6
+
 * Tue Dec 28 2021 Dan Muey <dan@cpanel.net> - 1.11.7-4
 - ZC-9589: Update DISABLE_BUILD to match OBS
 
