@@ -16,7 +16,7 @@
 %{?scl:%scl_package rubygem-%{gem_name}}
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define release_prefix 5
+%define release_prefix 6
 
 %global gem_name     nokogiri
 %global gemdir      %{gem_dir}
@@ -182,6 +182,9 @@ rm -rf %{buildroot}/%{gemsmri}/patches/
 /%{gemsbase}/doc
 
 %changelog
+* Thu Nov 24 2022 Travis Holloway <t.holloway@cpanel.net> - 1.11.7-6
+- EA-11073: ea-ruby27 was updated from v2.7.6 to v2.7.7
+
 * Tue Apr 12 2022 Cory McIntire <cory@cpanel.net> - 1.11.7-5
 - EA-10620: ea-ruby27 was updated from v2.7.5 to v2.7.6
 
