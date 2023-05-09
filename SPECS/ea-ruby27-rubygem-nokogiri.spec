@@ -1,5 +1,3 @@
-%define debug_package %{nil}
-
 # Defining the package namespace
 %global ns_name ea
 %global ns_dir /opt/cpanel
@@ -18,7 +16,7 @@
 %{?scl:%scl_package rubygem-%{gem_name}}
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define release_prefix 7
+%define release_prefix 8
 
 %global gem_name     nokogiri
 %global gemdir      %{gem_dir}
@@ -184,6 +182,9 @@ rm -rf %{buildroot}/%{gemsmri}/patches/
 /%{gemsbase}/doc
 
 %changelog
+* Tue May 09 2023 Brian Mendoza <brian.mendoza@cpanel.net> - 1.11.7-8
+- ZC-10936: Clean up Makefile and remove debug-package-nil
+
 * Fri Mar 31 2023 Cory McIntire <cory@cpanel.net> - 1.11.7-7
 - EA-11327: ea-ruby27 was updated from v2.7.7 to v2.7.8
 
