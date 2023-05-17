@@ -1,3 +1,6 @@
+%define debug_package %{nil}
+%define _enable_debug_packages %{nil}
+
 # Defining the package namespace
 %global ns_name ea
 %global ns_dir /opt/cpanel
@@ -16,7 +19,7 @@
 %{?scl:%scl_package rubygem-%{gem_name}}
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define release_prefix 8
+%define release_prefix 9
 
 %global gem_name     nokogiri
 %global gemdir      %{gem_dir}
@@ -182,6 +185,9 @@ rm -rf %{buildroot}/%{gemsmri}/patches/
 /%{gemsbase}/doc
 
 %changelog
+* Wed May 17 2023 Julian Brown <julian.brown@cpanel.net> - 1.11.7-9
+- ZC-10950: Fix build problems
+
 * Tue May 09 2023 Brian Mendoza <brian.mendoza@cpanel.net> - 1.11.7-8
 - ZC-10936: Clean up Makefile and remove debug-package-nil
 
