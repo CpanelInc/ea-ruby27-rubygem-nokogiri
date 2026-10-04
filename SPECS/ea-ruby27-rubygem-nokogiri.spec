@@ -19,7 +19,7 @@
 %{?scl:%scl_package rubygem-%{gem_name}}
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define release_prefix 9
+%define release_prefix 1
 
 %global gem_name     nokogiri
 %global gemdir      %{gem_dir}
@@ -33,7 +33,7 @@
 
 Summary:    An HTML, XML, SAX, and Reader parser
 Name:       %{?scl:%scl_prefix}rubygem-%{gem_name}
-Version:    1.11.7
+Version:    1.15.7
 Release:    %{release_prefix}%{?dist}.cpanel
 Group:      Development/Languages
 License:    MIT
@@ -185,6 +185,9 @@ rm -rf %{buildroot}/%{gemsmri}/patches/
 /%{gemsbase}/doc
 
 %changelog
+* Sun Oct 04 2026 EA4 Update Bot <cory.mcintire@webpros.com> - 1.15.7-1
+- EA-13582: Update ea-ruby27-rubygem-nokogiri from v1.11.7 to v1.15.7
+
 * Wed May 17 2023 Julian Brown <julian.brown@cpanel.net> - 1.11.7-9
 - ZC-10950: Fix build problems
 
