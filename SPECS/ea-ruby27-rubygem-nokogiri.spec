@@ -19,7 +19,7 @@
 %{?scl:%scl_package rubygem-%{gem_name}}
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define release_prefix 1
+%define release_prefix 2
 
 %global gem_name     nokogiri
 %global gemdir      %{gem_dir}
@@ -39,6 +39,8 @@ Group:      Development/Languages
 License:    MIT
 URL:        http://nokogiri.rubyforge.org/nokogiri/
 Source0:    https://rubygems.org/gems/%{gem_name}-%{version}.gem
+# Build-time only: extconf.rb builds the bundled libgumbo through mini_portile2
+Source1:    https://rubygems.org/gems/mini_portile2-2.8.9.gem
 
 Requires:       %{?scl_prefix}ruby(rubygems)
 Requires:       %{?scl_prefix}ruby(release)
@@ -85,6 +87,8 @@ This package provides non-Gem support for %{gem_name}.
 %prep
 %setup -q -T -c
 %{?scl:scl enable %{scl} - << \EOF}
+
+gem install --user-install --local --no-document %{SOURCE1}
 
 # Gem repack
 TOPDIR=$(pwd)
@@ -185,6 +189,9 @@ rm -rf %{buildroot}/%{gemsmri}/patches/
 /%{gemsbase}/doc
 
 %changelog
+* Tue Oct 06 2026 Cory McIntire <cory.mcintire@webpros.com> - 1.15.7-2
+- EA-13582: Vendor mini_portile2 at build time for the bundled libgumbo
+
 * Sun Oct 04 2026 EA4 Update Bot <cory.mcintire@webpros.com> - 1.15.7-1
 - EA-13582: Update ea-ruby27-rubygem-nokogiri from v1.11.7 to v1.15.7
 
